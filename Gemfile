@@ -23,6 +23,7 @@ gem "jbuilder"
 # my stuff
 gem 'activeadmin'
 gem 'devise'
+gem 'sassc'
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
