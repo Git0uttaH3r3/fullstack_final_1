@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get "lego_sets/index"
+  get "lego_sets/show"
+  get "pages/home"
+
+  root "pages#home"           # Homepage route
+  resources :lego_sets, only: [:index, :show]
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

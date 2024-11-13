@@ -1,0 +1,22 @@
+<h1><%= @lego_set.title %></h1>
+
+<div class="lego-set-detail">
+  <%= image_tag @lego_set.image, alt: @lego_set.title %>
+  <p><strong>Price:</strong> <%= number_to_currency(@lego_set.price) %></p>
+  <p><strong>Average Rating:</strong> <%= @lego_set.average_rating %></p>
+
+  <h2>Description</h2>
+  <p><%= @lego_set.description %></p> <!-- Add a description field if needed -->
+
+  <h2>Customer Reviews</h2>
+  <% if @reviews.any? %>
+    <% @reviews.each do |review| %>
+      <div class="review">
+        <p><strong><%= review.name %>:</strong> <%= review.rating %> stars</p>
+        <p><%= review.review %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews yet. Be the first to review!</p>
+  <% end %>
+</div>
