@@ -24,6 +24,8 @@ gem "jbuilder"
 gem 'activeadmin'
 gem 'devise'
 gem 'sassc'
+gem 'kaminari'
+gem 'gretel'
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

@@ -15,8 +15,47 @@
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
-
   <body>
+    <nav>
+      <%= image_tag 'block.png', alt: 'Bricktown Logo', class: 'nav-logo' %>
+      <h1><strong>Bricktown</strong></h2>
+    </nav>
+    <br><br><br><br>
+
     <%= yield %>
   </body>
+  <style>
+    .lego-sets
+    {
+      display: flex;
+    }
+
+    nav
+    {
+      background-color: #FFF;
+      border-style: solid;
+      border-color: #666666;
+      border-top:none;
+      border-right:none;
+      border-left:none;
+      position:fixed;
+      width: 100%;
+      display: flex;
+    }
+
+    body
+    {
+      background-image: url(<%= asset_path 'legobackground.jpg' %>);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .nav-logo
+    {
+      width: 100px;
+      height: auto;
+    }
+  </style>
 </html>
+

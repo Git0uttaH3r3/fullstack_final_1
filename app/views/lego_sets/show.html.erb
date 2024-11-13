@@ -5,9 +5,6 @@
   <p><strong>Price:</strong> <%= number_to_currency(@lego_set.price) %></p>
   <p><strong>Average Rating:</strong> <%= @lego_set.average_rating %></p>
 
-  <h2>Description</h2>
-  <p><%= @lego_set.description %></p> <!-- Add a description field if needed -->
-
   <h2>Customer Reviews</h2>
   <% if @reviews.any? %>
     <% @reviews.each do |review| %>
