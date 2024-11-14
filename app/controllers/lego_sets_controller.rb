@@ -2,7 +2,7 @@ class LegoSetsController < ApplicationController
   def index
     # Search Lego sets by title
     @lego_sets = if params[:query].present?
-                   LegoSet.where("title ILIKE ?", "%#{params[:query]}%")
+                   LegoSet.where("title LIKE ?", "%#{params[:query]}%")
                  else
                    LegoSet.all
                  end
