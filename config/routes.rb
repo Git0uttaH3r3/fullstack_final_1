@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get "reviews/create"
   get "lego_sets/index"
   get "lego_sets/show"
   get "pages/home"
 
   root "pages#home"           # Homepage route
   resources :lego_sets, only: [:index, :show]
+
+  resources :lego_sets, only: [:index, :show] do
+    resources :reviews, only: [:create]
+  end
+
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
