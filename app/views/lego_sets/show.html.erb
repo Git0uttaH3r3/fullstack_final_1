@@ -1,7 +1,6 @@
-<h1><%= @lego_set.title %></h1>
-
 <div class="lego-set-detail">
-  <%= image_tag @lego_set.image, alt: @lego_set.title %>
+  <h1><%= @lego_set.title %></h1>
+  <%= image_tag @lego_set.image, alt: @lego_set.title, class: "lego-set-detail-image" %>
   <p><strong>Price:</strong> <%= number_to_currency(@lego_set.price) %></p>
   <p><strong>Average Rating:</strong> <%= @lego_set.average_rating %></p>
 

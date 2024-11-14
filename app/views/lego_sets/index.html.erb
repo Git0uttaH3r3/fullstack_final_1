@@ -1,14 +1,19 @@
 <h1>All Lego Sets</h1>
-
+  <div class="paginate-lego-sets">
+    <%= paginate @lego_sets %>
+  </div>
 <div class="lego-sets">
   <% @lego_sets.each do |lego_set| %>
     <div class="lego-set">
       <%= image_tag lego_set.image, alt: lego_set.title %>
       <h2><%= lego_set.title %></h2>
       <p>Price: <%= number_to_currency(lego_set.price) %></p>
-      <%= link_to "View Details", lego_set_path(lego_set), class: "btn btn-primary" %>
+      <%= link_to "Take a look!", lego_set_path(lego_set), class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
+<div class="paginate-lego-sets">
+<%= paginate @lego_sets %>
+</div>
 
-<%= paginate @lego_sets %> <!-- Kaminari pagination control -->
+
