@@ -20,7 +20,7 @@
     <div class="nav-left">
       <%= image_tag 'block.png', alt: 'Bricktown Logo', class: 'nav-logo' %>
       <h1><strong>Bricktown</strong></h1>
-      <%= link_to "Sets", lego_sets_path, class: "nav-link" %>
+      <strong><%= link_to "Sets", lego_sets_path, class: "nav-link" %></strong>
       <div class="nav-search">
         <%= form_with url: lego_sets_path, method: :get, local: true, class: 'search-form' do %>
         <%= text_field_tag :query, params[:query], placeholder: "Search Lego Sets", class: "search-input" %>
@@ -78,6 +78,11 @@
     .paginate-lego-sets
     {
       float:left;
+      padding-bottom: 20px;
+    }
+
+    .nav-link{
+      text-decoration: none;
     }
 
     .nav-left
@@ -93,7 +98,11 @@
       background-attachment: fixed;
     }
 
-    .nav-search{
+    .btn btn-primary {
+      text-decoration: none;
+    }
+
+    .nav-search {
       display: flex;
     }
     .nav-logo
@@ -134,6 +143,15 @@
     /* Optional styling for review headers */
     .review strong {
       color: #333;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    /* Optional: Underline on hover */
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </html>
