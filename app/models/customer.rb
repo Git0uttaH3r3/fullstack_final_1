@@ -5,4 +5,12 @@ class Customer < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :address, presence: true
   validates :password, presence: true
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["id", "name", "email", "address", "created_at", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["orders"]
+  end
 end
