@@ -1,18 +1,13 @@
 ActiveAdmin.register Order do
+  permit_params :customer_id, :total_price, :status, :created_at
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :customer_id, :total_price, :status
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:customer_id, :total_price, :status]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  form do |f|
+    f.inputs "Order Details" do
+      f.input :customer_id, as: :select, collection: Customer.all.collect { |customer| [customer.name, customer.id] }
+      f.input :total_price
+      f.input :status, as: :select, collection: ["pending", "shipped", "completed", "canceled"]
+      f.input :created_at, as: :datetime_picker
+    end
+    f.actions
+  end
 end

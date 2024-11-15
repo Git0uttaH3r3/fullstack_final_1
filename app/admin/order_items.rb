@@ -1,18 +1,14 @@
 ActiveAdmin.register OrderItem do
+  permit_params :order_id, :lego_set_id, :quantity, :price_at_purchase
 
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  # permit_params :order_id, :lego_set_id, :quantity, :price_at_purchase
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:order_id, :lego_set_id, :quantity, :price_at_purchase]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
-  
+  form do |f|
+    f.inputs "Order Item Details" do
+      f.input :order_id, as: :select, collection: Order.all.collect { |order| [order.id, order.id] }
+      f.input :lego_set_id, as: :select, collection: LegoSet.all.collect { |lego_set| [lego_set.title, lego_set.id] }
+      f.input :quantity
+      f.input :price_at_purchase
+    end
+    f.actions
+  end
 end
+
