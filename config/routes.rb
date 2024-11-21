@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "static_pages/show"
   get "reviews/create"
   get "lego_sets/index"
   get "lego_sets/show"
