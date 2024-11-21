@@ -20,21 +20,22 @@
     <div class="nav-left">
       <%= image_tag 'block.png', alt: 'Bricktown Logo', class: 'nav-logo' %>
       <h1><strong>Bricktown</strong></h1>
-      <strong><%= link_to "Sets", lego_sets_path, class: "nav-link" %></strong>
+      <p class="nav-links" ><%= link_to "Home", root_path %></p>
+      <p class="nav-links" ><%= link_to "Sets", lego_sets_path %></p>
+      <p class="nav-links" ><%= link_to "About", static_page_path("about") %></p>
+      <p class="nav-links" ><%= link_to "Contact", static_page_path("contact") %></p>
       <div class="nav-search">
         <%= form_with url: lego_sets_path, method: :get, local: true, class: 'search-form' do %>
         <%= text_field_tag :query, params[:query], placeholder: "Search Lego Sets", class: "search-input" %>
         <%= submit_tag "Search", class: "search-button" %>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-    </div>
-
-
-
     <div class="nav-right">
 
     </div>
   </nav>
+
     <br><br><br><br><br>
 
     <%= breadcrumbs separator: " › " if defined?(breadcrumbs) %>
@@ -75,6 +76,14 @@
       height: auto;
     }
 
+    .nav-links
+    {
+      padding-left: 20px;
+      padding-top: 20px;
+      font-size: 20px;
+      padding-right: 5px;
+    }
+
     .paginate-lego-sets
     {
       float:left;
@@ -103,7 +112,8 @@
       text-decoration: none;
     }
 
-    .nav-search {
+    .nav-search
+    {
       display: flex;
     }
     .nav-logo

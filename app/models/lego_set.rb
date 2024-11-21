@@ -16,7 +16,7 @@ class LegoSet < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["id", "set_id", "title", "image", "price", "average_rating", "created_at", "updated_at"]
+    ["id", "set_id", "title", "image", "price", "description", "category", "average_rating", "created_at", "updated_at"]
   end
 end
 
