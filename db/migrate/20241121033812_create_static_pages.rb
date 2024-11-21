@@ -7,5 +7,6 @@ class CreateStaticPages < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
+    add_index :static_pages, :slug, unique: true
   end
 end

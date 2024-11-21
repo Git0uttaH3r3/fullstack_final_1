@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "lego_sets/index"
   get "lego_sets/show"
   get "pages/home"
+  get "/pages/:slug", to: "static_pages#show", as: :static_page
 
   root "pages#home"           # Homepage route
   resources :lego_sets, only: [:index, :show]
