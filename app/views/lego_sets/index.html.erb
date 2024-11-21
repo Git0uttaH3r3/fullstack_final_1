@@ -3,6 +3,9 @@
 <div class="sort-options">
 <%= link_to "Price: Low to High", lego_sets_path(query: params[:query], sort: "price_low_to_high"), class: "sort-link" %> |
 <%= link_to "Price: High to Low", lego_sets_path(query: params[:query], sort: "price_high_to_low"), class: "sort-link" %>
+<%= link_to "Show All", lego_sets_path, class: "filter-link" %>
+<%= link_to "Adult", lego_sets_path(category: "adult"), class: "filter-link" %>
+<%= link_to "Child", lego_sets_path(category: "child"), class: "filter-link" %>
 </div>
 
 <div class="lego-sets">

@@ -3,7 +3,6 @@ require 'json'
 OrderItem.delete_all
 Order.delete_all
 Customer.delete_all
-
 Review.delete_all
 LegoSet.delete_all
 
