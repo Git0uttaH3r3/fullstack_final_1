@@ -16,6 +16,7 @@
     <p><strong>Category:</strong> <%= lego_set.category.capitalize %></p>
     <p>Price: <%= number_to_currency(lego_set.price) %></p>
     <%= link_to "View Details", lego_set_path(lego_set), class: "btn btn-primary" %>
+    <%= button_to "Add to Cart", add_to_cart_path(lego_set_id: lego_set.id), method: :post, class: "btn btn-primary" %>
   </div>
 <% end %>
 </div>

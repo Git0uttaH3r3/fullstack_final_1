@@ -24,6 +24,7 @@
       <p class="nav-links" ><%= link_to "Sets", lego_sets_path %></p>
       <p class="nav-links" ><%= link_to "About", static_page_path("about") %></p>
       <p class="nav-links" ><%= link_to "Contact", static_page_path("contact") %></p>
+      <p class="nav-links" ><%= link_to "Cart (#{current_cart.values.sum})", cart_path, class: "nav-link cart-link" %></p>
       <div class="nav-search">
         <%= form_with url: lego_sets_path, method: :get, local: true, class: 'search-form' do %>
         <%= text_field_tag :query, params[:query], placeholder: "Search Lego Sets", class: "search-input" %>

@@ -1,2 +1,32 @@
-<h1>Cart#show</h1>
-<p>Find me in app/views/cart/show.html.erb</p>
+
+<br><br>
+<h1>Your Cart</h1>
+
+<% if @cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Lego Set</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |item| %>
+        <tr>
+          <td><%= item[:lego_set].title %></td>
+          <td><%= number_to_currency(item[:lego_set].price) %></td>
+          <td><%= item[:quantity] %></td>
+          <td><%= number_to_currency(item[:lego_set].price * item[:quantity]) %></td>
+          <td>
+            <%= link_to "Remove", remove_from_cart_path(lego_set_id: item[:lego_set].id), method: :delete, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

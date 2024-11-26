@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get "cart/show"
-  get "cart/add"
-  get "cart/remove"
+  get "/cart", to: "cart#show", as: :cart
+  post "/cart/add/:lego_set_id", to: "cart#add", as: :add_to_cart
+  get "/cart/remove/:lego_set_id", to: "cart#remove", as: :remove_from_cart
   get "static_pages/show"
   get "reviews/create"
   get "lego_sets/index"
