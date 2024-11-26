@@ -27,8 +27,9 @@
       <div class="nav-search">
         <%= form_with url: lego_sets_path, method: :get, local: true, class: 'search-form' do %>
         <%= text_field_tag :query, params[:query], placeholder: "Search Lego Sets", class: "search-input" %>
+        <%= select_tag :category, options_for_select([["All Categories", "all"], ["Adult", "adult"], ["Child", "child"]], params[:category]), class: "search-dropdown" %>
         <%= submit_tag "Search", class: "search-button" %>
-        <% end %>
+      <% end %>
       </div>
     </div>
     <div class="nav-right">
