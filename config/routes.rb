@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "cart/show"
+  get "cart/add"
+  get "cart/remove"
   get "static_pages/show"
   get "reviews/create"
   get "lego_sets/index"
