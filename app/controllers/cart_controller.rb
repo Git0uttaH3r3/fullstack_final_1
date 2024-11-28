@@ -6,14 +6,43 @@ class CartController < ApplicationController
     end
   end
 
+  def update
+    cart = current_cart
+    lego_set_id = params[:lego_set_id]
+    quantity = params[:quantity].to_i
+
+    if quantity <= 0
+      cart.delete(lego_set_id)
+    else
+      cart[lego_set_id] = quantity
+    end
+
+    session[:cart] = cart
+    redirect_to cart_path, notice: "Cart updated successfully!"
+  end
+
   def add
-    add_to_cart(params[:lego_set_id])
-    redirect_to request.referer, notice: "Added to cart!"
+    cart = current_cart
+    lego_set_id = params[:lego_set_id]
+    cart[lego_set_id] ||= 0
+    cart[lego_set_id] += 1
+    session[:cart] = cart
+
+    redirect_to cart_path, notice: "Item added to cart!"
   end
 
   def remove
-    remove_from_cart(params[:lego_set_id])
-    redirect_to cart_path, notice: "Removed from cart."
+    cart = current_cart
+    lego_set_id = params[:lego_set_id]
+    cart.delete(lego_set_id)
+
+    session[:cart] = cart
+    redirect_to cart_path, notice: "Item removed from cart."
+  end
+
+  private
+
+  def current_cart
+    session[:cart] ||= {}
   end
 end
-
