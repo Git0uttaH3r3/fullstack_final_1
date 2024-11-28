@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
 
   get "/cart", to: "cart#show", as: :cart
-  #get "/cart/update", to: "cart#update", as :cart
   post "/cart/add/:lego_set_id", to: "cart#add", as: :add_to_cart
   get "/cart/remove/:lego_set_id", to: "cart#remove", as: :remove_from_cart
 
-  resource :cart, only: [:show] do
+  resources :cart, only: [:show] do
     patch :update, on: :collection, as: :update
   end
 
