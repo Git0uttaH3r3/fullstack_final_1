@@ -2,8 +2,9 @@
 
 <div class="lego-set-detail">
   <%= image_tag @lego_set.image, alt: @lego_set.title, class: "lego-set-detail-image" %>
+  <p><strong>Category:</strong> <%= @lego_set.category.capitalize %></p>
   <p><strong>Price:</strong> <%= number_to_currency(@lego_set.price) %></p>
-  <p><strong>Average Rating:</strong> <%= @lego_set.average_rating %></p>
+  <%= button_to "Add to Cart", add_to_cart_path(lego_set_id: @lego_set.id), method: :post, class: "btn btn-primary" %>  <p><strong>Average Rating:</strong> <%= @lego_set.average_rating %></p>
 
   <h2>Customer Reviews</h2>
   <% if @reviews.any? %>

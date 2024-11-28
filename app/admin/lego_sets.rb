@@ -1,5 +1,5 @@
 ActiveAdmin.register LegoSet do
-  permit_params :set_id, :title, :image, :price, :average_rating
+  permit_params :set_id, :title, :image, :price, :description, :category, :average_rating
 
   index do
     selectable_column
@@ -8,6 +8,8 @@ ActiveAdmin.register LegoSet do
     column :title
     column :image
     column :price
+    column :description
+    column :category
     column :average_rating
     actions
   end
@@ -18,6 +20,8 @@ ActiveAdmin.register LegoSet do
       f.input :title
       f.input :image
       f.input :price
+      f.input :description
+      f.input :category
       f.input :average_rating
     end
     f.actions

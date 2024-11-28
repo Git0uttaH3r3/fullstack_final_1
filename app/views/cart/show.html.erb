@@ -1,0 +1,38 @@
+<h1>Your Cart</h1>
+
+<% if @cart_items.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Lego Set</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |item| %>
+        <tr>
+          <td><%= item[:lego_set].title %></td>
+          <td><%= number_to_currency(item[:lego_set].price) %></td>
+          <td>
+            <%= form_with url: update_cart_path, method: :patch, local: true do |f| %>
+              <%= f.hidden_field :lego_set_id, value: item[:lego_set].id %>
+              <%= f.number_field :quantity, value: item[:quantity], min: 1, class: "cart-quantity-input" %>
+              <%= f.submit "Update", class: "btn btn-primary btn-sm" %>
+            <% end %>
+          </td>
+          <td><%= number_to_currency(item[:lego_set].price * item[:quantity]) %></td>
+          <td>
+            <%= link_to "Remove", remove_from_cart_path(lego_set_id: item[:lego_set].id), method: :delete, class: "btn btn-danger btn-sm" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2>Total: <%= number_to_currency(@cart_items.sum { |item| item[:lego_set].price * item[:quantity] }) %></h2>
+<% else %>
+  <p>Your cart is empty.</p>
+<% end %>

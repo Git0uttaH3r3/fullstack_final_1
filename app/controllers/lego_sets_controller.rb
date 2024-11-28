@@ -1,20 +1,18 @@
 class LegoSetsController < ApplicationController
   def index
-    @lego_sets = if params[:query].present?
-                   LegoSet.where("title LIKE ?", "%#{params[:query]}%")
-                 else
-                   LegoSet.all
-                 end
+    @lego_sets = LegoSet.all
 
-    if params[:sort] == "price_high_to_low"
-      @lego_sets = @lego_sets.order(price: :desc)
-    elsif params[:sort] == "price_low_to_high"
-      @lego_sets = @lego_sets.order(price: :asc)
+    # Search by name
+    if params[:query].present?
+      @lego_sets = @lego_sets.where("title LIKE ?", "%#{params[:query]}%")
     end
-    if params[:category].present?
+
+    # Filter by category
+    if params[:category].present? && params[:category] != "all"
       @lego_sets = @lego_sets.where(category: params[:category])
     end
 
+    # Paginate results
     @lego_sets = @lego_sets.page(params[:page]).per(10)
   end
   def show
