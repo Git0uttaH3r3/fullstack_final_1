@@ -7,7 +7,7 @@ class LegoSet < ApplicationRecord
   validates :title, presence: true
   validates :image, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :category, presence: trues
+  validates :category, presence: true
 
   def average_rating
     reviews.average(:rating).to_f.round(1) if reviews.any?
