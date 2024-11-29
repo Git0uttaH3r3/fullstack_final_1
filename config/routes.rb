@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  devise_for :users, path: '', path_names: {
+    sign_in: 'login',
+    sign_out: 'logout',
+    sign_up: 'register'
+  }
+
+
   get "/cart", to: "cart#show", as: :cart
   post "/cart/add/:lego_set_id", to: "cart#add", as: :add_to_cart
   get "/cart/remove/:lego_set_id", to: "cart#remove", as: :remove_from_cart
@@ -15,7 +22,8 @@ Rails.application.routes.draw do
   get "pages/home"
   get "/pages/:slug", to: "static_pages#show", as: :static_page
 
-  root "pages#home"           # Homepage route
+  root "pages#home"
+             # Homepage route
   resources :lego_sets, only: [:index, :show] do
     resources :reviews, only: [:create]
   end
