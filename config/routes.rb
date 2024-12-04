@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  #get "/logout"
   devise_for :users, path: '', path_names: {
     sign_in: 'login',
     sign_out: 'logout',
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :cart, only: [:show] do
     patch :update, on: :collection, as: :update
+    post :place_order, on: :collection
   end
 
   get "static_pages/show"
