@@ -11,6 +11,11 @@ class CartController < ApplicationController
     lego_set_id = params[:lego_set_id]
     quantity = params[:quantity].to_i
 
+    if cart[lego_set_id].nil?
+      redirect_to cart_path, alert: "Item not found in the cart."
+      return
+    end
+
     if quantity <= 0
       cart.delete(lego_set_id)
     else

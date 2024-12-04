@@ -23,6 +23,7 @@ ActiveAdmin.register LegoSet do
       f.input :description
       f.input :category
       f.input :average_rating
+      f.input :category, as: :select, collection: Category.all.pluck(:name, :id)
     end
     f.actions
   end

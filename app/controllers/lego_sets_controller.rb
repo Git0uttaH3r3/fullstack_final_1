@@ -2,17 +2,16 @@ class LegoSetsController < ApplicationController
   def index
     @lego_sets = LegoSet.all
 
-    # Search by name
     if params[:query].present?
       @lego_sets = @lego_sets.where("title LIKE ?", "%#{params[:query]}%")
     end
 
-    # Filter by category
-    if params[:category].present? && params[:category] != "all"
-      @lego_sets = @lego_sets.where(category: params[:category])
+    if params[:category]
+      @lego_sets = LegoSet.where(category_id: params[:category])
+    else
+      @lego_sets = LegoSet.all
     end
 
-    # Paginate results
     @lego_sets = @lego_sets.page(params[:page]).per(10)
   end
   def show
