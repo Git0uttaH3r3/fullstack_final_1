@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post "/cart/add/:lego_set_id", to: "cart#add", as: :add_to_cart
   get "/cart/remove/:lego_set_id", to: "cart#remove", as: :remove_from_cart
 
+  resources :checkout, only: [:index, :create]
+
   resources :cart, only: [:show] do
     patch :update, on: :collection, as: :update
     post :place_order, on: :collection

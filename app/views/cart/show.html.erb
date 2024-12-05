@@ -33,6 +33,8 @@
   </table>
 
   <h2>Total: <%= number_to_currency(@cart_items.sum { |item| item[:lego_set].price * item[:quantity] }) %></h2>
+
+  <%= link_to "Proceed to Checkout", checkout_index_path, class: "btn btn-success btn-lg" %>
 <% else %>
   <p>Your cart is empty.</p>
 <% end %>

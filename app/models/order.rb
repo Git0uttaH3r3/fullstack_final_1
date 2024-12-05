@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   validates :total_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true, inclusion: { in: %w[pending shipped completed canceled] }
   validates :created_at, presence: true
+  validates :total_price, presence: true
 
 
   def self.ransackable_attributes(auth_object = nil)

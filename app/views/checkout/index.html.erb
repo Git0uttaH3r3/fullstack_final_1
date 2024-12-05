@@ -1,0 +1,51 @@
+<h1>Checkout</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lego Set</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @cart_items.each do |item| %>
+      <tr>
+        <td><%= item[:lego_set].title %></td>
+        <td><%= number_to_currency(item[:lego_set].price) %></td>
+        <td><%= item[:quantity] %></td>
+        <td><%= number_to_currency(item[:lego_set].price * item[:quantity]) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= form_with url: checkout_index_path, method: :post, local: true do |f| %>
+  <% unless current_user %>
+    <h2>Customer Details</h2>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, name: "customer[name]", class: "form-control", placeholder: "Full Name" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, name: "customer[email]", class: "form-control", placeholder: "Email Address" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address %>
+      <%= f.text_field :address, name: "customer[address]", class: "form-control", placeholder: "Shipping Address" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :province %>
+      <%= f.select :province, options_for_select(["MB", "ON", "NB", "NS", "NL"]), name: "customer[province]", class: "form-control" %>
+    </div>
+  <% end %>
+
+  <%= f.submit "Place Order", class: "btn btn-success btn-lg" %>
+<% end %>
+
+
