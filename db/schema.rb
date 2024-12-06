@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_06_021822) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_06_170055) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -87,7 +87,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_021822) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "customer_id", null: false
     t.decimal "total_price"
     t.string "status"
     t.datetime "created_at", null: false
@@ -96,7 +95,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_021822) do
     t.string "province"
     t.integer "user_id"
     t.decimal "taxes", precision: 10, scale: 2
-    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -135,6 +133,5 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_06_021822) do
   add_foreign_key "lego_sets", "categories"
   add_foreign_key "order_items", "lego_sets"
   add_foreign_key "order_items", "orders"
-  add_foreign_key "orders", "customers"
   add_foreign_key "reviews", "lego_sets"
 end

@@ -12,6 +12,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :address, "Address" %>
+    <%= f.text_field :address, required: true %>
+  </div>
+
+  <div class="field">
     <%= f.label :province %><br />
     <%= f.select :province, options_for_select(["MB", "ON", "QC", "BC", "NS", "AB", "NB", "PE", "NL"]) %>
   </div>

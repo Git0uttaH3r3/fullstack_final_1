@@ -1,0 +1,32 @@
+<h1>Your Orders</h1>
+
+<% if @orders.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Total Price</th>
+        <th>Status</th>
+        <th>Ordered At</th>
+        <th>Items</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= number_to_currency(order.total_price) %></td>
+          <td><%= order.status.capitalize %></td>
+          <td><%= order.created_at.strftime("%B %d, %Y %H:%M") %></td>
+          <td>
+            <% order.order_items.each do |item| %>
+              <p><%= item.quantity %> x <%= item.lego_set.title %> (<%= number_to_currency(item.price_at_purchase) %>)</p>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You have no orders.</p>
+<% end %>

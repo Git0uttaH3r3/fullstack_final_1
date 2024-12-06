@@ -5,36 +5,25 @@ class CheckoutController < ApplicationController
       { lego_set: lego_set, quantity: quantity }
     end
 
-    @customer = current_user || Customer.new
+    @user = current_user || User.new
   end
 
   def create
-    # Check if a user is logged in and use their details to create or find a Customer
-    customer = if current_user
-                 Customer.find_or_create_by!(email: current_user.email) do |cust|
-                   cust.name = "Guest User" # Default name
-                   cust.address = current_user.address
-                   cust.province = current_user.province
-                   cust.password = SecureRandom.hex(8) # Assign a random password
-                 end
-               else
-                 Customer.create!(
-                   name: params.dig(:customer, :name),
-                   email: params.dig(:customer, :email),
-                   address: params.dig(:customer, :address),
-                   province: params.dig(:customer, :province),
-                   password: SecureRandom.hex(8) # Assign a random password
-                 )
-               end
+    if current_user.address.blank? || current_user.province.blank?
+      redirect_to edit_user_registration_path, alert: "Please update your address and province to proceed with checkout."
+      return
+    end
 
-    # Calculate taxes and total price
-    province = customer.province
-    taxes, total_price = calculate_taxes_and_total(current_cart, province)
+    taxes, total_price = calculate_taxes_and_total(current_cart, current_user.province)
 
-    # Create the order and associate it with the customer
-    order = customer.orders.create!(total_price: total_price, status: "pending")
+    order = current_user.orders.create!(
+      total_price: total_price,
+      status: "pending",
+      address: current_user.address,
+      province: current_user.province,
+      taxes: taxes
+    )
 
-    # Create order items
     current_cart.each do |lego_set_id, quantity|
       lego_set = LegoSet.find(lego_set_id)
       order.order_items.create!(
@@ -44,7 +33,6 @@ class CheckoutController < ApplicationController
       )
     end
 
-    # Clear the cart and redirect with a success message
     session[:cart] = {}
     redirect_to root_path, notice: "Order successfully placed! Invoice sent to your email."
   end
@@ -56,6 +44,8 @@ class CheckoutController < ApplicationController
   def current_cart
     session[:cart] ||= {}
   end
+
+  private
 
   def calculate_taxes_and_total(cart, province)
     gst = 0.05

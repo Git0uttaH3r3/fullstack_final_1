@@ -1,0 +1,36 @@
+<h1>Order Invoice</h1>
+
+<p><strong>Order ID:</strong> <%= @order.id %></p>
+<p><strong>Date:</strong> <%= @order.created_at.strftime("%B %d, %Y") %></p>
+<p><strong>Status:</strong> <%= @order.status.capitalize %></p>
+<p><strong>Shipping Address:</strong> <%= @order.address %></p>
+<p><strong>Province:</strong> <%= @order.province %></p>
+
+<h2>Items</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.lego_set.title %></td>
+        <td><%= number_to_currency(item.price_at_purchase) %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency(item.price_at_purchase * item.quantity) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Summary</h2>
+<p><strong>Subtotal:</strong> <%= number_to_currency(@order.total_price - @order.taxes) %></p>
+<p><strong>Taxes:</strong> <%= number_to_currency(@order.taxes) %></p>
+<p><strong>Total:</strong> <%= number_to_currency(@order.total_price) %></p>
+
+<%= link_to "Back to Orders", orders_path, class: "btn btn-secondary" %>

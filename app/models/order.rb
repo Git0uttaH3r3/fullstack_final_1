@@ -1,11 +1,13 @@
 class Order < ApplicationRecord
-  belongs_to :customer
-  has_many :order_items
+  belongs_to :user
+  has_many :order_items, dependent: :destroy
 
-  validates :customer_id, presence: true
+
   validates :total_price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true, inclusion: { in: %w[pending shipped completed canceled] }
   #validates :created_at, presence: true
+  validates :address, presence: true
+  validates :province, presence: true
 
 
   def self.ransackable_attributes(auth_object = nil)
