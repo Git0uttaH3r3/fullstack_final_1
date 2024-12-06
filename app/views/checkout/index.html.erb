@@ -21,6 +21,12 @@
   </tbody>
 </table>
 
+<% if user_signed_in? %>
+  <h2>Shipping Information</h2>
+  <p><strong>Address:</strong> <%= current_user.address %></p>
+  <p><strong>Province:</strong> <%= current_user.province %></p>
+<% end %>
+
 <%= form_with url: checkout_index_path, method: :post, local: true do |f| %>
   <% unless current_user %>
     <h2>Customer Details</h2>
