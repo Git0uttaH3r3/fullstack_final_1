@@ -9,24 +9,30 @@ class CheckoutController < ApplicationController
   end
 
   def create
-    # If a user is logged in, use their details; otherwise, create a new customer
+    # Check if a user is logged in and use their details to create or find a Customer
     customer = if current_user
-                 current_user
+                 Customer.find_or_create_by!(email: current_user.email) do |cust|
+                   cust.name = "Guest User" # Default name
+                   cust.address = current_user.address
+                   cust.province = current_user.province
+                   cust.password = SecureRandom.hex(8) # Assign a random password
+                 end
                else
                  Customer.create!(
                    name: params.dig(:customer, :name),
                    email: params.dig(:customer, :email),
                    address: params.dig(:customer, :address),
-                   province: params.dig(:customer, :province)
+                   province: params.dig(:customer, :province),
+                   password: SecureRandom.hex(8) # Assign a random password
                  )
                end
 
     # Calculate taxes and total price
-    province = customer.province || params.dig(:customer, :province)
+    province = customer.province
     taxes, total_price = calculate_taxes_and_total(current_cart, province)
 
     # Create the order and associate it with the customer
-    order = customer.orders.create!(total_price: total_price, taxes: taxes)
+    order = customer.orders.create!(total_price: total_price, status: "pending")
 
     # Create order items
     current_cart.each do |lego_set_id, quantity|
@@ -42,6 +48,7 @@ class CheckoutController < ApplicationController
     session[:cart] = {}
     redirect_to root_path, notice: "Order successfully placed! Invoice sent to your email."
   end
+
 
 
   private

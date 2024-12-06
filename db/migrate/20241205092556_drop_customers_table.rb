@@ -1,13 +1,15 @@
-class CreateCustomers < ActiveRecord::Migration[7.2]
-  def change
+class DropCustomersTable < ActiveRecord::Migration[6.1]
+  def up
+    drop_table :customers
+  end
+
+  def down
     create_table :customers do |t|
       t.string :name
       t.string :email
       t.string :address
-      t.string :password
-
+      t.string :province
       t.timestamps
     end
-    add_index :customers, :email, unique: true
   end
 end

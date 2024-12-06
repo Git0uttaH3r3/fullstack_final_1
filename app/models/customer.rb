@@ -7,6 +7,13 @@ class Customer < ApplicationRecord
   validates :province, presence: true
   validates :password, presence: true
 
+  before_validation :set_default_province, on: :create
+
+
+  def set_default_province
+    self.province ||= "MB"
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     ["id", "name", "email", "address", "created_at", "updated_at"]
   end

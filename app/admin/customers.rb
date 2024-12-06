@@ -7,6 +7,7 @@ ActiveAdmin.register Customer do
       f.input :email
       f.input :address
       f.input :password
+      f.input :province
     end
     f.actions
   end
