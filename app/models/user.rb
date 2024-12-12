@@ -14,8 +14,8 @@ class User < ApplicationRecord
   private
 
   def set_defaults
-    self.name ||= "Guest User"
-    self.address ||= "Unknown Address"
+    self.name ||= "Justin"
+    self.address ||= "123 Main Street, Winnipeg"
     self.province ||= "MB"
   end
 end

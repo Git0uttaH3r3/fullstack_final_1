@@ -1,0 +1,6 @@
+<tr>
+  <td><%= item[:lego_set].title %></td>
+  <td><%= number_to_currency(item[:lego_set].price) %></td>
+  <td><%= item[:quantity] %></td>
+  <td><%= number_to_currency(item[:lego_set].price * item[:quantity]) %></td>
+</tr>
